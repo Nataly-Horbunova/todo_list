@@ -103,6 +103,10 @@ h1, h2, p {
     line-height: var(--lh-s);
 }
 
+.incomplete{
+    outline: 1px solid var(--danger-color);
+}
+
 .add-form-text:focus, 
 .add-form-date:focus, 
 .add-form-priority:focus,
@@ -156,19 +160,24 @@ h1, h2, p {
 }
 
 .priority-list-wrapper{
+    flex-basis: 30%;
+}
+
+.priority-list{
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 30px;
-    flex-basis: 30%;
+    /*flex-basis: 30%;*/
+    width: 100%;
     padding: clamp(20px, calc(20 / 1200 * 100vw), 20px);
     border-radius: 6px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.priority-list-wrapper.medium-priority::before,
-.priority-list-wrapper.high-priority::before,
-.priority-list-wrapper.low-priority::before{
+.priority-list.medium-priority::before,
+.priority-list.high-priority::before,
+.priority-list.low-priority::before{
     position: absolute;
     top: 0;
     left: 0;
@@ -178,39 +187,39 @@ h1, h2, p {
     border-radius: 6px 6px 0 0;
 }
 
-.priority-list-wrapper.medium-priority {
+.priority-list.medium-priority {
     background-color: var(--secondary-color-2);
 }
 
-.priority-list-wrapper.medium-priority li {
+.priority-list.medium-priority li {
         background-color: var(--secondary-color-3);
 }
 
-.priority-list-wrapper.medium-priority::before{
+.priority-list.medium-priority::before{
     background-color: var(--secondary-color-1);
     }
 
-.priority-list-wrapper.high-priority{
+.priority-list.high-priority{
     background-color: var(--tertiary-color-2);
 }
 
-.priority-list-wrapper.high-priority li{
+.priority-list.high-priority li{
     background-color: var(--tertiary-color-3);
 }
 
-.priority-list-wrapper.high-priority::before{
+.priority-list.high-priority::before{
 background-color: var(--tertiary-color-1);
 }
 
-.priority-list-wrapper.low-priority{
+.priority-list.low-priority{
     background-color: var(--main-color-6);
 }
 
-.priority-list-wrapper.low-priority::before{
+.priority-list.low-priority::before{
     background-color: var(--main-color-2);
     }
 
-.priority-list-wrapper.low-priority li{
+.priority-list.low-priority li{
     background-color: var(--main-color-7);
     }
 
@@ -262,7 +271,7 @@ background-color: var(--tertiary-color-1);
 }
 
 .list-item-info.expired .todo-date {
-    color: rgb(206, 42, 42);
+    color: var(--danger-color);
 }
 
 .todo-date{

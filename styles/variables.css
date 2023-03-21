@@ -20,6 +20,8 @@
     --tertiary-color-1: rgb(250, 146, 146); /* --high-pr-dark-color */
     --tertiary-color-2: rgba(255, 238, 238, 0.6); 
     --tertiary-color-3: rgba(241, 186, 186, 0.3); /* --high-pr-light-color */
+
+    --danger-color: rgb(206, 42, 42);
    
 
     --fz-xs: clamp(10px, calc(12 / 1200 * 100vw), 12px);

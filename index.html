@@ -27,8 +27,8 @@
     <section class="todo-form-section container">
       <form class="add-form" name="addForm">
         <input type="text" name="text" placeholder="What needs to be done?" class="add-form-text">
-        <input type="date" class="add-form-date" id="date">
-        <select class="add-form-priority">
+        <input type="date" class="add-form-date" id="date" name="date">
+        <select class="add-form-priority" name="priority">
           <option value="priority" class="priority-item" disabled selected>priority</option>
           <option value="high" class="priority-item">high</option>
           <option value="medium" class="priority-item">medium</option>
@@ -39,180 +39,192 @@
     </section>
 
     <section class="todo-lists-section container">
-      <div class="priority-list-wrapper high-priority">
-        <h2 class="priority-list-title">Hight priority</h2>
-        <ul class="todo-list ">
-          <li class="todo-list-item completed">
-            <input type="checkbox" class="todo-state" checked>
-            <div class="list-item-info">
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
+      <div class="priority-list-wrapper high-priority-wrapper">
+<!--        <div class="priority-list high-priority">-->
+<!--          <h2 class="priority-list-title">High priority</h2>-->
+<!--          <ul class="todo-list ">-->
+<!--            <li class="todo-list-item completed">-->
+<!--              <input type="checkbox" class="todo-state" checked>-->
+<!--              <div class="list-item-info">-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
 
-          <li class="todo-list-item completed">
-            <input type="checkbox" class="todo-state" checked>
-            <div class="list-item-info">
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
-          <li class="todo-list-item">
-            <input type="checkbox" class="todo-state">
-            <div class="list-item-info expired">
-              <p class="todo-text" >Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">16 Mar, 2023</p>
-            </div>
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
-          <li class="todo-list-item">
-            <input type="checkbox" class="todo-state">
-            <div class="list-item-info" hidden>
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
+<!--            <li class="todo-list-item completed">-->
+<!--              <input type="checkbox" class="todo-state" checked>-->
+<!--              <div class="list-item-info">-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
+<!--            <li class="todo-list-item">-->
+<!--              <input type="checkbox" class="todo-state">-->
+<!--              <div class="list-item-info expired">-->
+<!--                <p class="todo-text" >Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">16 Mar, 2023</p>-->
+<!--              </div>-->
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
+<!--            <li class="todo-list-item">-->
+<!--              <input type="checkbox" class="todo-state">-->
+<!--              <div class="list-item-info" hidden>-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
 
-            <form class="edit-form">
-              <input type="text" class="edit-form-text">
-              <input type="date" class="edit-form-date">
-              <div class="edit-btns">
-                <button class="btn">Save</button>
-                <button class="btn">Cancel</button>
-              </div>
-            </form>
+<!--              <form class="edit-form">-->
+<!--                <input type="text" class="edit-form-text">-->
+<!--                <input type="date" class="edit-form-date">-->
+<!--                <div class="edit-btns">-->
+<!--                  <button class="btn">Save</button>-->
+<!--                  <button class="btn">Cancel</button>-->
+<!--                </div>-->
+<!--              </form>-->
 
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
-        </ul>
-        <div class="filters">
-          <button class="btn completed-filter">Completed</button>
-          <button class="btn active-filter">Active</button>
-          <button class="btn all-filter">All</button>
-        </div>
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--          <div class="filters">-->
+<!--            <button class="btn completed-filter">Completed</button>-->
+<!--            <button class="btn active-filter">Active</button>-->
+<!--            <button class="btn all-filter">All</button>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
 
-      <div class="priority-list-wrapper medium-priority">
-        <h2 class="priority-list-title">Medium priority</h2>
-        <ul class="todo-list ">
-          <li class="todo-list-item">
-            <input type="checkbox" class="todo-state">
-            <div class="list-item-info" hidden>
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
+      <div class="priority-list-wrapper medium-priority-wrapper">
+<!--        <div class="priority-list medium-priority">-->
+<!--          <h2 class="priority-list-title">Medium priority</h2>-->
+<!--          <ul class="todo-list ">-->
+<!--            <li class="todo-list-item" >-->
+<!--              <input type="checkbox" class="todo-state">-->
+<!--              <div class="list-item-info" hidden>-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
 
-            <form class="edit-form">
-              <input type="text" class="edit-form-text">
-              <input type="date" class="edit-form-date">
-              <div class="edit-btns">
-                <button class="btn">Save</button>
-                <button class="btn">Cancel</button>
-              </div>
-            </form>
+<!--              <form class="edit-form">-->
+<!--                <input type="text" class="edit-form-text">-->
+<!--                <input type="date" class="edit-form-date">-->
+<!--                <div class="edit-btns">-->
+<!--                  <button class="btn">Save</button>-->
+<!--                  <button class="btn">Cancel</button>-->
+<!--                </div>-->
+<!--              </form>-->
 
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
 
-          <li class="todo-list-item">
-            <input type="checkbox" class="todo-state">
-            <div class="list-item-info">
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
+<!--            <li class="todo-list-item">-->
+<!--              <input type="checkbox" class="todo-state">-->
+<!--              <div class="list-item-info">-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
 
-          <li class="todo-list-item">
-            <input type="checkbox" class="todo-state">
-            <div class="list-item-info">
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
-        </ul>
+<!--            <li class="todo-list-item">-->
+<!--              <input type="checkbox" class="todo-state">-->
+<!--              <div class="list-item-info">-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
+<!--          </ul>-->
 
-        <div class="filters">
-          <button class="btn completed-filter">Completed</button>
-          <button class="btn active-filter">Active</button>
-          <button class="btn all-filter">All</button>
-        </div>
+<!--          <div class="filters">-->
+<!--            <button class="btn completed-filter">Completed</button>-->
+<!--            <button class="btn active-filter">Active</button>-->
+<!--            <button class="btn all-filter">All</button>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
 
-      <div class="priority-list-wrapper low-priority">
-        <h2 class="priority-list-title">Low priority</h2>
-        <ul class="todo-list ">
-          <li class="todo-list-item">
-            <input type="checkbox" class="todo-state">
-            <div class="list-item-info">
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
+      <div class="priority-list-wrapper low-priority-wrapper">
+<!--        <div class="priority-list low-priority">-->
+<!--          <h2 class="priority-list-title">Low priority</h2>-->
+<!--          <ul class="todo-list ">-->
+<!--            <li class="todo-list-item">-->
+<!--              <input type="checkbox" class="todo-state">-->
+<!--              <div class="list-item-info">-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
 
-          <li class="todo-list-item">
-            <input type="checkbox" class="todo-state">
-            <div class="list-item-info" hidden>
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
+<!--            <li class="todo-list-item">-->
+<!--              <input type="checkbox" class="todo-state">-->
+<!--              <div class="list-item-info" hidden>-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
 
-            <form class="edit-form">
-              <input type="text" class="edit-form-text">
-              <input type="date" class="edit-form-date">
-              <div class="edit-btns">
-                <button class="btn">Save</button>
-                <button class="btn">Cancel</button>
-              </div>
-            </form>
+<!--              <form class="edit-form">-->
+<!--                <input type="text" class="edit-form-text">-->
+<!--                <input type="date" class="edit-form-date">-->
+<!--                <div class="edit-btns">-->
+<!--                  <button class="btn">Save</button>-->
+<!--                  <button class="btn">Cancel</button>-->
+<!--                </div>-->
+<!--              </form>-->
 
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
 
-          </li>
+<!--            </li>-->
 
-          <li class="todo-list-item">
-            <input type="checkbox" class="todo-state">
-            <div class="list-item-info">
-              <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>
-              <p class="todo-date">20 Mar, 2023</p>
-            </div>
-            <button class="todo-remove-btn">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li>
-        </ul>
+<!--            <li class="todo-list-item">-->
+<!--              <input type="checkbox" class="todo-state">-->
+<!--              <div class="list-item-info">-->
+<!--                <p class="todo-text">Lorem ipsum dolor sit ame tametamet.</p>-->
+<!--                <p class="todo-date">20 Mar, 2023</p>-->
+<!--              </div>-->
+<!--              <button class="todo-remove-btn">-->
+<!--                <i class="fa-solid fa-trash"></i>-->
+<!--              </button>-->
+<!--            </li>-->
+<!--          </ul>-->
 
-        <div class="filters">
-          <button class="btn completed-filter">Completed</button>
-          <button class="btn active-filter">Active</button>
-          <button class="btn all-filter">All</button>
-        </div>
+<!--          <div class="filters">-->
+<!--            <button class="btn completed-filter">Completed</button>-->
+<!--            <button class="btn active-filter">Active</button>-->
+<!--            <button class="btn all-filter">All</button>-->
+<!--          </div>-->
 
+<!--        </div>-->
       </div>
-
     </section>
   </main>
+
+
+<script src="./scripts/todoModel.js"></script>
+<script src="./scripts/todoListsModel.js"></script>
+<script src="./scripts/todoListView.js"></script>
+<script src="./scripts/todoListsView.js"></script>
+<script src="./scripts/main.js"></script>
 </body>
 
 </html>
