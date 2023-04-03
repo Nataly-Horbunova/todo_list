@@ -117,8 +117,7 @@ class TodoListView {
                 const dateNew = data.get('date');
                 const isUnique = this.listModel.checkUnique(textNew);
 
-
-                if (!textNew || !isUnique) {
+                if (!textNew || !isUnique && textNew !== taskText.innerText) {
                     this.toggleIncompleteClass(editText, true);
                 }
 
@@ -126,10 +125,9 @@ class TodoListView {
                     this.toggleIncompleteClass(editDate, true);
                 }
 
-
                 if (e.submitter.classList.contains('save-btn')
                     && textNew
-                    && isUnique
+                    && (isUnique || !isUnique && textNew === taskText.innerText)
                     && dateNew
                     && dateNew >= this.listModel.currentDate) {
                     this.toggleIncompleteClass(editText, false);
@@ -137,7 +135,7 @@ class TodoListView {
 
                         this.listModel.editTodo(id, textNew, dateNew);
                         this.renderList();
-                } else if (e.submitter.classList.contains('cancel-btn')) {
+                } else if (e.submitter.classList.contains('cancel-btn') || (e.submitter.classList.contains('save-btn') && textNew === taskText.innerText)) {
                     this.renderList();
                 }
             });
