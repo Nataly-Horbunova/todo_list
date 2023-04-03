@@ -35,9 +35,13 @@ class TodoListView {
         });
 
         const filters = this.createElem('div', wrapper, ['filters']);
-        this.createElem('button', filters, ['btn', 'completed-filter'], '', 'Completed');
-        this.createElem('button', filters, ['btn', 'active-filter'], '', 'Active');
-        this.createElem('button', filters, ['btn', 'all-filter'], '', 'All');
+        const showCompletedBtn = this.createElem('button', filters, ['btn', 'completed-filter'], '', 'Completed');
+        const showActiveBtn = this.createElem('button', filters, ['btn', 'active-filter'], '', 'Active');
+        const showAllBtn = this.createElem('button', filters, ['btn', 'all-filter'], '', 'All');
+
+        showCompletedBtn.addEventListener('click', this.showTasks.bind(this, 'none', 'flex'));
+        showActiveBtn.addEventListener('click', this.showTasks.bind(this, 'flex', 'none'));
+        showAllBtn.addEventListener('click', this.showTasks.bind(this, 'flex', 'flex'));
 
         this.tag.append(fragment);
     }
@@ -133,8 +137,8 @@ class TodoListView {
                     this.toggleIncompleteClass(editText, false);
                     this.toggleIncompleteClass(editDate, false);
 
-                        this.listModel.editTodo(id, textNew, dateNew);
-                        this.renderList();
+                    this.listModel.editTodo(id, textNew, dateNew);
+                    this.renderList();
                 } else if (e.submitter.classList.contains('cancel-btn') || (e.submitter.classList.contains('save-btn') && textNew === taskText.innerText)) {
                     this.renderList();
                 }
@@ -153,13 +157,12 @@ class TodoListView {
         }
     }
 
-    showCompleted() {
-    }
+    showTasks(activeDisplay, completedDisplay) {
+        const activeItems = document.querySelectorAll(`.${this.priority}-priority-wrapper .todo-list-item:not(.completed)`);
+        const completedItems = document.querySelectorAll(`.${this.priority}-priority-wrapper .todo-list-item.completed`);
 
-    showActive() {
-    }
-
-    showAll() {
+        activeItems.forEach(item => item.style.display = activeDisplay);
+        completedItems.forEach(item => item.style.display = completedDisplay);
     }
 
     createElem(tag, parent, classLists, attrs = null, text = null) {
