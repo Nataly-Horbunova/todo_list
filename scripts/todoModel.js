@@ -8,9 +8,9 @@ class TodoModel {
         this.priority = priority;
     }
 
-    edit(text, date) {
-        this.text = text;
-        this.date = date;
+    edit(textNew, dateNew) {
+        this.text = textNew;
+        this.date = dateNew;
     }
 
     toggle() {

@@ -25,8 +25,8 @@ class TodoListView {
             const task = this.createElem('div', li, ['list-item-info']);
             this.createElem('p', task, ['todo-text'], '', todo.text);
             this.createElem('p', task, ['todo-date'], '', todo.date);
-            li.insertAdjacentHTML('beforeend', `<button class="todo-remove-btn">
-            <i class="fa-solid fa-trash"></i></button>`);
+            li.insertAdjacentHTML('beforeend', `<button class="todo-edit-btn"><i class="fa-solid fa-pen"></i></button>`)
+            li.insertAdjacentHTML('beforeend', `<button class="todo-remove-btn"><i class="fa-solid fa-trash"></i></button>`);
 
             if (todo.state) {
                 li.classList.add('completed');
@@ -65,12 +65,94 @@ class TodoListView {
             const id = toggleItem.getAttribute('data-id');
 
             if (id) {
-                const index = this.listModel.findTodoIndex(id);
-                this.listModel.tasks[index].toggle();
-
+                this.listModel.toggleTodo(id);
                 toggleItem.classList.toggle('completed');
             }
         });
+    }
+
+    initEdit() {
+        this.tag.addEventListener('click', ({target}) => {
+
+            if (!target.classList.contains('fa-pen')) return;
+            target.style.display = 'none';
+
+            const editItem = target.closest('[data-id]');
+            const id = editItem.getAttribute('data-id');
+
+            if (!id) return;
+
+            const task = document.querySelector(`li[data-id="${id}"]`);
+            const taskText = document.querySelector(`li[data-id="${id}"] .todo-text`);
+            const taskTextInnerText = taskText.innerText;
+            const taskDate = document.querySelector(`li[data-id="${id}"] .todo-date`);
+            const taskDateInnerText = taskDate.innerText;
+            const taskState = document.querySelector(`li[data-id="${id}"] .todo-state`);
+            const taskInfo = document.querySelector(`li[data-id="${id}"] .list-item-info`);
+            const taskEditBtn = document.querySelector(`li[data-id="${id}"] .todo-edit-btn`);
+            const fragment = new DocumentFragment;
+
+            const editForm = this.createElem('form', fragment, ['edit-form'], [{type: 'name', value: 'editForm'}]);
+            const editText = this.createElem('input', editForm, ['edit-form-text'],
+                [{type: 'type', value: 'text'}, {type: 'name', value: 'text'},
+                    {type: 'value', value: `${taskTextInnerText}`}]);
+            const editDate = this.createElem('input', editForm, ['edit-form-date'],
+                [{type: 'type', value: 'date'}, {type: 'name', value: 'date'},
+                    {type: 'value', value: `${taskDateInnerText}`}]);
+            const editFormBtns = this.createElem('div', editForm, ['edit-btns']);
+            this.createElem('button', editFormBtns, ['btn', 'save-btn'], '', 'Save');
+            this.createElem('button', editFormBtns, ['btn', 'cancel-btn'], '', 'Cancel');
+
+            taskInfo.setAttribute('hidden', '');
+            taskState.setAttribute('hidden', '');
+            taskEditBtn.setAttribute('hidden', '');
+
+            document.querySelector('.todo-list-item:hover').style.transform = 'scale(1)';
+            task.prepend(fragment);
+
+            editForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = new FormData(e.target);
+                const textNew = data.get('text').trim();
+                const dateNew = data.get('date');
+                const isUnique = this.listModel.checkUnique(textNew);
+
+
+                if (!textNew || !isUnique) {
+                    this.toggleIncompleteClass(editText, true);
+                }
+
+                if (!dateNew || dateNew < this.listModel.currentDate) {
+                    this.toggleIncompleteClass(editDate, true);
+                }
+
+
+                if (e.submitter.classList.contains('save-btn')
+                    && textNew
+                    && isUnique
+                    && dateNew
+                    && dateNew >= this.listModel.currentDate) {
+                    this.toggleIncompleteClass(editText, false);
+                    this.toggleIncompleteClass(editDate, false);
+
+                        this.listModel.editTodo(id, textNew, dateNew);
+                        this.renderList();
+                } else if (e.submitter.classList.contains('cancel-btn')) {
+                    this.renderList();
+                }
+            });
+        })
+
+    }
+
+    toggleIncompleteClass(tag, flag) {
+        const isIncomplete = tag.classList.contains('incomplete');
+        if (flag && !isIncomplete) {
+            tag.classList.add('incomplete');
+        }
+        if (!flag && isIncomplete) {
+            tag.classList.remove('incomplete');
+        }
     }
 
     showCompleted() {
@@ -108,6 +190,7 @@ class TodoListView {
     init() {
         this.initToggle();
         this.initRemove();
+        this.initEdit();
         // renderList();
     }
 }

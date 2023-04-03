@@ -28,12 +28,14 @@ class TodoListsView {
             const text = data.get('text').trim();
             const date = data.get('date');
             const priority = data.get('priority');
+            const isUnique = this.listModel.checkUnique(text);
 
-            if (!text) {
+
+            if (!text || !isUnique) {
                 this.toggleIncompleteClass(this.addFormText, true);
             }
 
-            if (!date || date < this.currentDate) {
+            if (!date || date < this.listModel.currentDate) {
                 this.toggleIncompleteClass(this.addFormDate, true);
             }
 
@@ -41,7 +43,11 @@ class TodoListsView {
                 this.toggleIncompleteClass(this.addFormPriority, true);
             }
 
-            if (text && date && priority && date >= this.currentDate) {
+            if (text
+                && isUnique
+                && date
+                && priority
+                && date >= this.listModel.currentDate) {
                 this.toggleIncompleteClass(this.addFormText, false);
                 this.toggleIncompleteClass(this.addFormDate, false);
                 this.toggleIncompleteClass(this.addFormPriority, false);
@@ -56,17 +62,11 @@ class TodoListsView {
     toggleIncompleteClass(tag, flag) {
         const isIncomplete = tag.classList.contains('incomplete');
         if (flag && !isIncomplete) {
-            tag.classList.add('incomplete')
+            tag.classList.add('incomplete');
         }
         if (!flag && isIncomplete) {
             tag.classList.remove('incomplete');
         }
-    }
-
-    get currentDate() {
-        const date = new Date;
-        return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-
     }
 
     init() {
