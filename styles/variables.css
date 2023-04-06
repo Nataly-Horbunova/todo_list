@@ -4,11 +4,11 @@
     --main-color-1: #55A1E0; /* --tertiary-text-color */
     --main-color-2: #55c1ff; /* --secondary-color */
     --main-color-3: rgb(124, 206, 253); /* --low-pr-dark-color */
-    --main-color-4: #A0CDF4; /* --tertiary-color ----------------------*/  
+    --main-color-4: #A0CDF4; /* --tertiary-color ----------------------*/
     --main-color-5: #B2DAFF; /*  --secondary-text-color -----------*/
     --main-color-6:  rgba(236, 246, 253, 0.6); /* --low-pr-light-color*/
     --main-color-7: rgba(147, 202, 239, 0.3); /*--primary-color */
-    
+
     --primary-color-1: #424242; /*  --main-text-color */
     --primary-color-2: #818181; /*--casual-text-color:*/
     --primary-color-3: #FFFFFF; /* --primary-text-color*/
@@ -18,11 +18,11 @@
     --secondary-color-3: rgba(242, 215, 165, 0.3); /* --medium-pr-light-color */
 
     --tertiary-color-1: rgb(250, 146, 146); /* --high-pr-dark-color */
-    --tertiary-color-2: rgba(255, 238, 238, 0.6); 
+    --tertiary-color-2: rgba(255, 238, 238, 0.6);
     --tertiary-color-3: rgba(241, 186, 186, 0.3); /* --high-pr-light-color */
 
     --danger-color: rgb(206, 42, 42);
-   
+
 
     --fz-xs: clamp(10px, calc(12 / 1200 * 100vw), 12px);
     --fz-s: clamp(14px, calc(16 / 1200 * 100vw), 16px);
