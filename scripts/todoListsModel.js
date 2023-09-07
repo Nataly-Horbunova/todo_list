@@ -1,6 +1,7 @@
 class TodoListsModel {
-    constructor() {
+    constructor(storage) {
         this.tasks = [];
+        this.storage = storage;
     }
 
     addTask(text, date, priority) {
@@ -14,6 +15,9 @@ class TodoListsModel {
 
     toggleTodo(id) {
         const index = this.findTodoIndex(id);
+        
+        if (index === -1) return;
+
         this.tasks[index].toggle();
     }
 
@@ -55,7 +59,6 @@ class TodoListsModel {
     get currentDate() {
         const date = new Date;
         return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-
     }
 }
 

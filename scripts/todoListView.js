@@ -55,6 +55,7 @@ class TodoListView {
 
             if (id) {
                 this.listModel.removeTodo(id);
+                this.listModel.storage.setToLocalStorage('todos', JSON.stringify(this.listModel.tasks));
                 this.renderList();
             }
 
@@ -71,6 +72,7 @@ class TodoListView {
             if (id) {
                 this.listModel.toggleTodo(id);
                 toggleItem.classList.toggle('completed');
+                this.listModel.storage.setToLocalStorage('todos', JSON.stringify(this.listModel.tasks));
             }
         });
     }
@@ -138,6 +140,7 @@ class TodoListView {
                     this.toggleIncompleteClass(editDate, false);
 
                     this.listModel.editTodo(id, textNew, dateNew);
+                    this.listModel.storage.setToLocalStorage('todos', JSON.stringify(this.listModel.tasks));
                     this.renderList();
                 } else if (e.submitter.classList.contains('cancel-btn') || (e.submitter.classList.contains('save-btn') && textNew === taskText.innerText)) {
                     this.renderList();
@@ -192,6 +195,5 @@ class TodoListView {
         this.initToggle();
         this.initRemove();
         this.initEdit();
-        // renderList();
     }
 }

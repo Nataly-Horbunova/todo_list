@@ -12,13 +12,19 @@ class TodoListsView {
     }
 
     renderByPriority(priority) {
-        if (priority === 'high') {
-            this.highPriorityList.renderList();
-        } else if (priority === 'medium') {
-            this.mediumPriorityList.renderList();
-        } else if (priority === 'low') {
-            this.lowPriorityList.renderList();
-        }
+        switch (priority) {
+            case 'high':
+                this.highPriorityList.renderList();
+                break;
+            case 'medium':
+                this.mediumPriorityList.renderList();
+                break;
+            case 'low':
+                this.lowPriorityList.renderList();
+                break;
+            default:
+                break;
+            }
     }
 
     initSubmit() {
@@ -45,7 +51,6 @@ class TodoListsView {
 
             if (text
                 && isUnique
-                && date
                 && priority
                 && date >= this.listModel.currentDate) {
                 this.toggleIncompleteClass(this.addFormText, false);
@@ -53,6 +58,7 @@ class TodoListsView {
                 this.toggleIncompleteClass(this.addFormPriority, false);
 
                 this.listModel.addTask(text, date, priority);
+                this.listModel.storage.setToLocalStorage('todos', JSON.stringify(this.listModel.tasks)); 
                 this.renderByPriority(priority);
                 e.target.reset();
             }
@@ -70,6 +76,15 @@ class TodoListsView {
     }
 
     init() {
+        const ref = this.listModel.storage.getFromLocalStorage('todos');
+
+        if (ref) {
+            this.listModel.tasks = JSON.parse(ref);
+            this.highPriorityList.renderList();
+            this.mediumPriorityList.renderList();
+            this.lowPriorityList.renderList();
+        }
+
         this.initSubmit();
         this.highPriorityList.init();
         this.mediumPriorityList.init();
