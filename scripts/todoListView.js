@@ -35,13 +35,22 @@ class TodoListView {
         });
 
         const filters = this.createElem('div', wrapper, ['filters']);
-        const showCompletedBtn = this.createElem('button', filters, ['btn', 'completed-filter'], '', 'Completed');
-        const showActiveBtn = this.createElem('button', filters, ['btn', 'active-filter'], '', 'Active');
-        const showAllBtn = this.createElem('button', filters, ['btn', 'all-filter'], '', 'All');
+        const showCompletedBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`], '', 'Completed');
+        const showActiveBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`], '', 'Active');
+        const showAllBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`, 'active'], '', 'All');
 
-        showCompletedBtn.addEventListener('click', this.showTasks.bind(this, 'none', 'flex'));
-        showActiveBtn.addEventListener('click', this.showTasks.bind(this, 'flex', 'none'));
-        showAllBtn.addEventListener('click', this.showTasks.bind(this, 'flex', 'flex'));
+        showCompletedBtn.addEventListener('click', (e) => {
+            this.showTasks.call(this, 'none', 'flex', e.target);
+        });
+
+        showActiveBtn.addEventListener('click', (e) => {
+            this.showTasks.call(this, 'flex', 'none', e.target);
+        });
+
+        showAllBtn.addEventListener('click', (e) => {
+            this.showTasks.call(this, 'flex', 'flex', e.target);
+        });
+
 
         this.tag.append(fragment);
     }
@@ -160,9 +169,16 @@ class TodoListView {
         }
     }
 
-    showTasks(activeDisplay, completedDisplay) {
+    showTasks(activeDisplay, completedDisplay, target) {
         const activeItems = document.querySelectorAll(`.${this.priority}-priority-wrapper .todo-list-item:not(.completed)`);
         const completedItems = document.querySelectorAll(`.${this.priority}-priority-wrapper .todo-list-item.completed`);
+
+        const filterBtns = document.querySelectorAll(`.${this.priority}-filter-btn`);
+
+        if (!target.classList.contains('active')) {
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            target.classList.add('active');
+        }
 
         activeItems.forEach(item => item.style.display = activeDisplay);
         completedItems.forEach(item => item.style.display = completedDisplay);

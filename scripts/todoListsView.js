@@ -79,7 +79,11 @@ class TodoListsView {
         const ref = this.listModel.storage.getFromLocalStorage('todos');
 
         if (ref) {
-            this.listModel.tasks = JSON.parse(ref);
+            const savedTasks = JSON.parse(ref);
+            this.listModel.tasks = savedTasks.map(taskData => {
+                return new TodoModel(taskData.text, taskData.date, taskData.priority, taskData.uuid, taskData.state);
+            });
+
             this.highPriorityList.renderList();
             this.mediumPriorityList.renderList();
             this.lowPriorityList.renderList();

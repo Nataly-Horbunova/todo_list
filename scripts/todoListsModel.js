@@ -4,9 +4,10 @@ class TodoListsModel {
         this.storage = storage;
     }
 
-    addTask(text, date, priority) {
-            const newTask = new TodoModel(text, date, priority);
-            this.tasks.push(newTask);
+    addTask(text, date, priority) {      
+        const uuid = Date.now();
+        const newTask = new TodoModel(text, date, priority, uuid);
+        this.tasks.push(newTask);
     }
 
     removeTodo(id) {
@@ -17,7 +18,6 @@ class TodoListsModel {
         const index = this.findTodoIndex(id);
         
         if (index === -1) return;
-
         this.tasks[index].toggle();
     }
 

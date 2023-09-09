@@ -8,6 +8,7 @@
 }
 
 @font-face {
+    font-family: 'Poppins';
     src: url('../fonts/Poppins-Medium.woff2') format('woff2'),
         url('../fonts/Poppins-Medium.woff') format('woff');
     font-weight: normal;

@@ -1,11 +1,10 @@
 class TodoModel {
-    uuid = Date.now();
-    state = false;
-
-    constructor(text, date, priority) {
+    constructor(text, date, priority, uuid, state = false) {
         this.text = text;
         this.date = date;
         this.priority = priority;
+        this.uuid = uuid;
+        this.state = state;
     }
 
     edit(textNew, dateNew) {
@@ -17,4 +16,3 @@ class TodoModel {
         this.state = !this.state;
     }
 }
-
