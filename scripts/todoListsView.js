@@ -12,19 +12,16 @@ class TodoListsView {
     }
 
     renderByPriority(priority) {
-        switch (priority) {
-            case 'high':
-                this.highPriorityList.renderList();
-                break;
-            case 'medium':
-                this.mediumPriorityList.renderList();
-                break;
-            case 'low':
-                this.lowPriorityList.renderList();
-                break;
-            default:
-                break;
-            }
+        const lists = {
+            'high': this.highPriorityList,
+            'medium': this.mediumPriorityList,
+            'low': this.lowPriorityList
+        };
+    
+        const list = lists[priority];
+        if (list) {
+            list.renderList();
+        }
     }
 
     initSubmit() {

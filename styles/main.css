@@ -194,6 +194,14 @@ background-color: var(--tertiary-color-1);
     gap: 10px;
 }
 
+.empty-list-item{
+    font-size: var(--fz-xs);
+    line-height: var(--lh-xs);
+    font-style: italic;
+    text-align: center;
+    padding: 10px 0;
+}
+
 .todo-list-item{
     display: flex;
     justify-content: space-between;
@@ -201,7 +209,7 @@ background-color: var(--tertiary-color-1);
     padding: 6px;
     gap: 10px;
     transition: .2s;
-    /* cursor: grab; */
+    cursor: grab;
 }
 
 .todo-list-item{

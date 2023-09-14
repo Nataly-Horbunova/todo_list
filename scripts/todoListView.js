@@ -11,48 +11,89 @@ class TodoListView {
 
         const priorityLists = this.listModel.priorityLists;
         const tasks = priorityLists[this.priority];
-
-        if (!tasks.length) return;
-
         const fragment = new DocumentFragment;
         const wrapper = this.createElem('div', fragment, ['priority-list', `${this.priority}-priority`]);
         this.createElem('h2', wrapper, ['priority-list-title'], '', this.listTitleText);
         const ul = this.createElem('ul', wrapper, ['todo-list']);
 
-        tasks.forEach(todo => {
-            const li = this.createElem('li', ul, ['todo-list-item'], [{type: 'data-id', value: todo.uuid}]);
-            const checkbox = this.createElem('input', li, ['todo-state'], [{type: 'type', value: 'checkbox'}]);
-            const task = this.createElem('div', li, ['list-item-info']);
-            this.createElem('p', task, ['todo-text'], '', todo.text);
-            this.createElem('p', task, ['todo-date'], '', todo.date);
-            li.insertAdjacentHTML('beforeend', `<button class="todo-edit-btn"><i class="fa-solid fa-pen"></i></button>`)
-            li.insertAdjacentHTML('beforeend', `<button class="todo-remove-btn"><i class="fa-solid fa-trash"></i></button>`);
+        this.tag.addEventListener('dragover', this.handleDragOver);
+        this.tag.addEventListener('drop', this.handleDrop.bind(this));
 
-            if (todo.state) {
-                li.classList.add('completed');
-                checkbox.setAttribute('checked', '');
-            }
-        });
+        if (!tasks.length) {
+            this.createElem('li', ul, ['empty-list-item'], '', 'The list is empty');
+        } else {
+            tasks.forEach(todo => {
+                const li = this.createElem('li', ul, ['todo-list-item'], [{type: 'data-id', value: todo.uuid}]);
+                const checkbox = this.createElem('input', li, ['todo-state'], [{type: 'type', value: 'checkbox'}]);
+                const task = this.createElem('div', li, ['list-item-info']);
+                this.createElem('p', task, ['todo-text'], '', todo.text);
+                this.createElem('p', task, ['todo-date'], '', todo.date);
+                li.insertAdjacentHTML('beforeend', `<button class="todo-edit-btn"><i class="fa-solid fa-pen"></i></button>`)
+                li.insertAdjacentHTML('beforeend', `<button class="todo-remove-btn"><i class="fa-solid fa-trash"></i></button>`);
+                li.draggable = true;
+    
+                if (todo.state) {
+                    li.classList.add('completed');
+                    checkbox.setAttribute('checked', '');
+                }
+    
+                li.addEventListener('dragstart', this.handleDragStart.bind(this));
+                li.addEventListener('dragend', this.handleDragEnd.bind(this)); 
+            });
 
-        const filters = this.createElem('div', wrapper, ['filters']);
-        const showCompletedBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`], '', 'Completed');
-        const showActiveBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`], '', 'Active');
-        const showAllBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`, 'active'], '', 'All');
+            const filters = this.createElem('div', wrapper, ['filters']);
+            const showCompletedBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`], '', 'Completed');
+            const showActiveBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`], '', 'Active');
+            const showAllBtn = this.createElem('button', filters, ['btn', `${this.priority}-filter-btn`, 'active'], '', 'All');
 
-        showCompletedBtn.addEventListener('click', (e) => {
-            this.showTasks.call(this, 'none', 'flex', e.target);
-        });
+            showCompletedBtn.addEventListener('click', (e) => {
+                this.showTasks.call(this, 'none', 'flex', e.target);
+            });
 
-        showActiveBtn.addEventListener('click', (e) => {
-            this.showTasks.call(this, 'flex', 'none', e.target);
-        });
+            showActiveBtn.addEventListener('click', (e) => {
+                this.showTasks.call(this, 'flex', 'none', e.target);
+            });
 
-        showAllBtn.addEventListener('click', (e) => {
-            this.showTasks.call(this, 'flex', 'flex', e.target);
-        });
-
+            showAllBtn.addEventListener('click', (e) => {
+                this.showTasks.call(this, 'flex', 'flex', e.target);
+            }); 
+        }
 
         this.tag.append(fragment);
+    }
+
+
+    handleDragStart(e) {
+        const id = e.target.getAttribute('data-id');
+        
+        if (id) {
+            e.dataTransfer.effectAllowed = "move";
+            e.dataTransfer.setData("todo", id);
+        }
+    }
+    
+    handleDragEnd() {
+        this.renderList();
+    }
+    
+    handleDragOver(e) {
+        e.preventDefault();
+    }
+    
+    handleDrop(e) {
+        e.preventDefault();
+
+        const id = e.dataTransfer.getData('todo'); 
+        const index = this.listModel.findTodoIndex(id);
+
+        this.listModel.tasks[index].priority = this.priority;
+
+        const dragItem = document.querySelector(`li[data-id="${id}"]`);
+        const ul = document.querySelector(`.${this.priority}-priority > .todo-list`);
+
+        ul.appendChild(dragItem);
+        this.renderList();
+        this.listModel.storage.setToLocalStorage('todos', JSON.stringify(this.listModel.tasks));
     }
 
     initRemove() {
