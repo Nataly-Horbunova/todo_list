@@ -1,6 +1,6 @@
 # Todo App
 
-The Todo App is a flexible task organizer that helps users manage their tasks with a real-time clock. It allows to categorize tasks into three levels of importance: high, medium, and low. This app is built using JavaScript and offers following useful features:
+The Todo App is a flexible task organizer that helps users manage their tasks. It includes a real-time clock and allows to categorize tasks into three levels of importance: high, medium, and low. This app is built using JavaScript and offers following useful features:
 
 ## Features
 
